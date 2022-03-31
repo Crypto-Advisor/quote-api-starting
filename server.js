@@ -10,16 +10,17 @@ app.use(express.static('public'));
 
 app.listen(PORT, ()=>console.log(`now listening on port ${PORT}`))
 
+console.log(quotes)
 
 app.get('/api/quotes/random', (req, res, next) =>{
-    res.send(getRandomElement(quotes))
+    res.send({quote: getRandomElement(quotes)})
 })
 
 app.get('/api/quotes', (req, res, next) =>{
     if(req.query.person){
-        res.send(quotes.filter(item => item.person === req.query.person))
+        res.send({quotes: quotes.filter(item => item.person === req.query.person)})
     }else{
-        res.send(quotes)
+        res.send({quotes: quotes})
     }
 })
 
